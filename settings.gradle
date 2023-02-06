@@ -1,0 +1,22 @@
+
+// I had all this, don't think I changed it
+ pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+  rootProject.name = "My Note App"
+
+//don't touch next line include app. Can't comment it out and so I included it in the code copied form the github
+  include ':app'
+
+  //rootProject.name = "ToDo App"
