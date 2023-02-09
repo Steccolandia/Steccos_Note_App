@@ -16,7 +16,6 @@ class ToDoViewModel(application: Application) : AndroidViewModel(application){
     private val toDoDao = ToDoDatabase.getDatabase(application).toDoDao()
     private var repository : ToDoRepository = ToDoRepository(toDoDao)
 
-     //in next line if I removed =repository.getAllData as it didn't give me any error, and it didn't appear in lesson 22
      var getAllData: LiveData<List<ToDoData>> = repository.getAllData
      val sortByHighPriority : LiveData<List<ToDoData>> = repository.sortByHighPriority
      val sortByLowPriority : LiveData<List<ToDoData>> = repository.sortByLowPriority

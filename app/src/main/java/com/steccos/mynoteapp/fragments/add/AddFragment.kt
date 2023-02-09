@@ -69,7 +69,7 @@ class AddFragment : Fragment() {
                 mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
-            //next line causes the add note 'clicker' to crash
+
             mToDoViewModel.insertData(newData)
             Toast.makeText(requireContext(), "Successfully Added", Toast.LENGTH_SHORT).show()
             //navigate back
