@@ -1,30 +1,26 @@
 package com.steccos.mynoteapp.data.viewModel
 
  import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import com.steccos.mynoteapp.data.ToDoDatabase
-import com.steccos.mynoteapp.data.models.ToDoData
-import com.steccos.mynoteapp.data.repository.ToDoRepository
- import dagger.hilt.android.AndroidEntryPoint
- import dagger.hilt.android.lifecycle.HiltViewModel
+ import androidx.lifecycle.AndroidViewModel
+ import androidx.lifecycle.LiveData
+ import androidx.lifecycle.viewModelScope
+ import com.steccos.mynoteapp.data.ToDoDatabase
+ import com.steccos.mynoteapp.data.models.ToDoData
+ import com.steccos.mynoteapp.data.repository.ToDoRepository
  import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+ import kotlinx.coroutines.launch
 
 
- class ToDoViewModel(application: Application) : AndroidViewModel(application){
-// the symbol !! doesn't appear in the course
+class ToDoViewModel(application: Application) : AndroidViewModel(application){
+//
     private val toDoDao = ToDoDatabase.getDatabase(application).toDoDao()
     private var repository : ToDoRepository = ToDoRepository(toDoDao)
 
      //in next line if I removed =repository.getAllData as it didn't give me any error, and it didn't appear in lesson 22
-     var getAllData: LiveData<List<ToDoData>>
+     var getAllData: LiveData<List<ToDoData>> = repository.getAllData
+     val sortByHighPriority : LiveData<List<ToDoData>> = repository.sortByHighPriority
+     val sortByLowPriority : LiveData<List<ToDoData>> = repository.sortByLowPriority
 
-    init {
-        repository = ToDoRepository(toDoDao)
-        getAllData = repository.getAllData
-    }
     fun insertData(toDoData: ToDoData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(toDoData)
@@ -36,5 +32,20 @@ import kotlinx.coroutines.launch
             repository.updateData(toDoData)
         }
     }
+     fun deleteItem(toDoData: ToDoData) {
+         viewModelScope.launch(Dispatchers.IO) {
+             repository.deleteItem(toDoData)
+         }
+     }
+
+     fun deleteAll() {
+         viewModelScope.launch(Dispatchers.IO) {
+             repository.deleteAll()
+         }
+     }
+
+     fun searchDatabase(searchQuery: String): LiveData<List<ToDoData>>{
+         return repository.searchDatabase(searchQuery)
+     }
 
 }

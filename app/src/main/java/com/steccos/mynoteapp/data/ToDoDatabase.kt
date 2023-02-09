@@ -2,6 +2,7 @@ package com.steccos.mynoteapp.data
 
 import android.content.Context
 import androidx.room.*
+import androidx.room.RoomDatabase
 import com.steccos.mynoteapp.data.models.ToDoData
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized

@@ -1,9 +1,9 @@
 package com.steccos.mynoteapp.fragments
 
 import android.os.Build
+import androidx.annotation.RequiresApi
 import android.view.View
 import android.widget.Spinner
-import androidx.annotation.RequiresApi
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -14,7 +14,6 @@ import com.steccos.mynoteapp.R
 import com.steccos.mynoteapp.data.models.Priority
 import com.steccos.mynoteapp.data.models.ToDoData
 import com.steccos.mynoteapp.fragments.list.ListFragmentDirections
-import java.util.Currency
 
 class BindingAdapters {
 
@@ -39,11 +38,11 @@ class BindingAdapters {
         }
         @BindingAdapter("android:parsePriorityToInt")
         @JvmStatic
-        fun parsePriorityToInt(view: Spinner, priority: Priority) {
+        fun parsePriorityToInt(view : Spinner, priority: Priority) {
             when(priority){
-                Priority.HIGH -> 0
-                Priority.MEDIUM -> 1
-                Priority.LOW -> 2
+                Priority.HIGH -> { view.setSelection(0) }
+                Priority.MEDIUM -> { view.setSelection(1) }
+                Priority.LOW -> { view.setSelection(2) }
                 Priority.URGENT -> TODO()
                 Priority.REMINDER -> TODO()
 

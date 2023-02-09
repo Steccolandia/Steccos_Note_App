@@ -3,52 +3,61 @@ package com.steccos.mynoteapp.fragments.add
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.steccos.mynoteapp.R
 import com.steccos.mynoteapp.data.models.ToDoData
 import com.steccos.mynoteapp.data.viewModel.ToDoViewModel
+import com.steccos.mynoteapp.databinding.FragmentAddBinding
 import com.steccos.mynoteapp.fragments.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.android.synthetic.main.fragment_add.view.*
 
 class AddFragment : Fragment() {
 
     private val mToDoViewModel : ToDoViewModel by viewModels()
     private val mSharedViewModel : SharedViewModel by viewModels()
 
+    private var _binding : FragmentAddBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add, container, false)
+        _binding = FragmentAddBinding.inflate(layoutInflater, container, false)
 
-        //set menu
-        setHasOptionsMenu(true)
+        binding.prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
 
-        view.priorities_spinner.onItemSelectedListener = mSharedViewModel.listener
-
-        return view
+        return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.add_fragment_menu, menu)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.add_fragment_menu, menu)
+            }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_add){
-            insertDataToDb()
-        }
-        return super.onOptionsItemSelected(item)
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.menu_add) {
+                    insertDataToDb()
+                } else if (menuItem.itemId == android.R.id.home) {
+                    requireActivity().onBackPressed()
+                }
+                return true
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun insertDataToDb() {
-        val mTitle = title_et.text.toString()
-        val mPriority = priorities_spinner.selectedItem.toString()
-        val mDescription = description_et.text.toString()
+        val mTitle = binding.titleEt.text.toString()
+        val mPriority = binding.prioritiesSpinner.selectedItem.toString()
+        val mDescription = binding.descriptionEt.text.toString()
 
 
         val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
@@ -70,6 +79,11 @@ class AddFragment : Fragment() {
 
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -1,7 +1,6 @@
 package com.steccos.mynoteapp.fragments
 
 import android.app.Application
-import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
@@ -11,12 +10,11 @@ import androidx.lifecycle.MutableLiveData
 import com.steccos.mynoteapp.R
 import com.steccos.mynoteapp.data.models.Priority
 import com.steccos.mynoteapp.data.models.ToDoData
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
-    val emptyDatabase : MutableLiveData<Boolean> = MutableLiveData(false)
+     val emptyDatabase : MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun checkIfDatabaseIsEmpty(toDoData: List<ToDoData>) {
         emptyDatabase.value = toDoData.isEmpty()
@@ -34,17 +32,10 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
             }
         }
-
-
-
     }
 
-
-
      fun verifyDataFromUser(title : String, description : String) : Boolean {
-        return if(TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        }else !(title.isEmpty() || description.isEmpty())
+        return !(title.isEmpty() || description.isEmpty())
     }
 
      fun parsePriority(priority : String) : Priority {
@@ -57,12 +48,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                 Priority.LOW}
             else -> Priority.LOW
         }
-
-    }
-
-
-
-    fun checkIfDatabaseIsEmpty() {
 
     }
 }
