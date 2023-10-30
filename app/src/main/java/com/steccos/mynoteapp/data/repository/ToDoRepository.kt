@@ -1,7 +1,6 @@
 package com.steccos.mynoteapp.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.room.Query
 import com.steccos.mynoteapp.data.ToDoDao
 import com.steccos.mynoteapp.data.models.ToDoData
 

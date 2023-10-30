@@ -81,7 +81,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                         mToDoViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
                             adapter.setData(it)
                         }
-                    android.R.id.home -> requireActivity().onBackPressed()
+                    android.R.id.home -> requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
                 return true
             }
@@ -103,7 +103,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 //delete item
                 mToDoViewModel.deleteItem(deletedItem)
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
-                //restore deleteddata fun
+                //restore deletedData fun
                 restoreDeletedData(viewHolder.itemView, deletedItem)
             }
         }

@@ -16,9 +16,11 @@
 
     <string-array name="priorities">
 
+        <item>Urgent</item>
         <item>High Priority</item>
         <item>Medium Priority</item>
         <item>Low Priority</item>
+        <item>Reminder</item>
 
     </string-array>
 </resources>

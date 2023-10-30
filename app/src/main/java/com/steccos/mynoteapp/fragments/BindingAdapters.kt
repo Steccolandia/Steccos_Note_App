@@ -40,11 +40,11 @@ import com.steccos.mynoteapp.fragments.list.ListFragmentDirections
             @JvmStatic
             fun parsePriorityToInt(view : Spinner, priority: Priority) {
                 when(priority){
-                    Priority.HIGH -> { view.setSelection(0) }
-                    Priority.MEDIUM -> { view.setSelection(1) }
-                    Priority.LOW -> { view.setSelection(2) }
-                    Priority.URGENT -> TODO()
-                    Priority.REMINDER -> TODO()
+                    Priority.URGENT -> { view.setSelection(0) }
+                    Priority.HIGH -> { view.setSelection(1) }
+                    Priority.MEDIUM -> { view.setSelection(2) }
+                    Priority.LOW -> { view.setSelection(3) }
+                    Priority.REMINDER -> { view.setSelection(4) }
 
                 }
 
@@ -54,11 +54,11 @@ import com.steccos.mynoteapp.fragments.list.ListFragmentDirections
             @JvmStatic
             fun parsePriorityColor(cardView: CardView, priority: Priority) {
                 when(priority) {
-                    Priority.HIGH -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red))}
-                    Priority.MEDIUM -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.light_blue))}
-                    Priority.LOW -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green))}
-                    Priority.URGENT -> TODO()
-                    Priority.REMINDER -> TODO()
+                    Priority.URGENT -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red))}
+                    Priority.HIGH -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow))}
+                    Priority.MEDIUM -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.purple_500))}
+                    Priority.LOW -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.light_blue))}
+                    Priority.REMINDER -> {cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green))}
                 }
             }
             @BindingAdapter("android:sendDataToUpdateFragment")
