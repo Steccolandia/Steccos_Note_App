@@ -81,6 +81,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                         mToDoViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
                             adapter.setData(it)
                         }
+                    R.id.menu_change_background -> TODO()
+
                     android.R.id.home -> requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
                 return true
@@ -138,7 +140,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val searchQuery = "%$query%"
 
         mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner) { list ->
-            list?.let {
+            //removed ? after list
+            list.let {
                 Log.d("ListFragment", "searchThroughDatabase")
                 adapter.setData(it)
             }
@@ -161,6 +164,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         builder.setTitle("Delete Everything?")
         builder.setMessage("Are you sure you want to remove everything?")
         builder.create().show()
+
+    }
+
+    // Change BACKGROUND FUNCTION
+
+    fun setNewBackground() {
 
     }
 

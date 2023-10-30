@@ -11,7 +11,7 @@
         app:actionViewClass="android.widget.SearchView"/>
 
     <group android:checkableBehavior="single">
-      <item
+        <item
           android:id="@+id/sort_by"
           android:title="@string/sort_by">
           <menu>
@@ -30,5 +30,8 @@
         android:id="@+id/menu_delete_all"
         android:title="@string/delete_all"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_change_background"
+        android:title="@string/Change_Background" />
 
 </menu>
