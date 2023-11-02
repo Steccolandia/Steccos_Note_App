@@ -1,5 +1,6 @@
 package com.steccos.mynoteapp.data.models
 
+import android.media.Image
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey

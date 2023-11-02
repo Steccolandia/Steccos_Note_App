@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
@@ -30,8 +31,35 @@
         android:id="@+id/menu_delete_all"
         android:title="@string/delete_all"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_change_background"
-        android:title="@string/Change_Background" />
+    <group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_change_bg"
+            android:checkable="false"
+            android:title="@string/Change_Background">
+            <menu>
+
+                <item
+                    android:id="@+id/bg_forest"
+                    android:title="@string/forest"
+                    android:checkable="true"
+                    />
+                <item
+                    android:id="@+id/forest_subButton"
+                    android:title="@string/forestButton"
+                    android:checkable="true"
+                    app:actionProviderClass="androidx.mediarouter.app.MediaRouteActionProvider"
+                    tools:icon="@drawable/mr_button_light" />
+                <item
+                    android:id="@+id/bg_orange"
+                    android:title="@string/orange" />
+                <item
+                    android:id="@+id/bg_hemp"
+                    android:title="@string/hemp" />
+            </menu>
+        </item>
+    </group>
 
 </menu>

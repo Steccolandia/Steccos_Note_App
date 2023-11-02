@@ -7,3 +7,9 @@ enum class Priority {
     LOW,
     REMINDER
 }
+
+enum class Background {
+    FOREST,
+    ORANGE,
+    HEMP
+}

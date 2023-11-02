@@ -15,6 +15,11 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
 
+    <string name="forest">Forest</string>
+    <string name="orange">Orange</string>
+    <string name="hemp">Hemp</string>
+    <string name="forestButton">Forest_button</string>
+
     <string-array name="priorities">
 
         <item>Urgent</item>
@@ -24,4 +29,5 @@
         <item>Reminder</item>
 
     </string-array>
+
 </resources>

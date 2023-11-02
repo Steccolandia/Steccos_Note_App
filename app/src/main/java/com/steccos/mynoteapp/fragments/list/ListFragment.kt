@@ -3,7 +3,12 @@ package com.steccos.mynoteapp.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
@@ -48,7 +53,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         mToDoViewModel.getAllData.observe(viewLifecycleOwner) { data ->
             mSharedViewModel.checkIfDatabaseIsEmpty(data)
             adapter.setData(data)
-            binding.recyclerView.scheduleLayoutAnimation()
+            binding.recyclerViewListView.scheduleLayoutAnimation()
         }
 
         //Hide soft keyboard
@@ -81,7 +86,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                         mToDoViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
                             adapter.setData(it)
                         }
-                    R.id.menu_change_background -> TODO()
 
                     android.R.id.home -> requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
@@ -90,9 +94,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
     }
-
     private fun setupRecyclerview() {
-        val recyclerView = binding.recyclerView
+        val recyclerView = binding.recyclerViewListView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         //swipe to delete
@@ -140,7 +143,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val searchQuery = "%$query%"
 
         mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner) { list ->
-            //removed ? after list
             list.let {
                 Log.d("ListFragment", "searchThroughDatabase")
                 adapter.setData(it)
@@ -166,13 +168,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         builder.create().show()
 
     }
-
-    // Change BACKGROUND FUNCTION
-
-    fun setNewBackground() {
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

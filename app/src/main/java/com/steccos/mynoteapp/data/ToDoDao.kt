@@ -2,6 +2,7 @@ package com.steccos.mynoteapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.steccos.mynoteapp.data.models.Background
 import com.steccos.mynoteapp.data.models.ToDoData
 
 @Dao
@@ -15,9 +16,6 @@ interface ToDoDao {
 
     @Update
     suspend fun updateData(toDoData: ToDoData)
-
-    @Update
-    fun setNewBackground(toDoData: ToDoData)
 
     @Delete
     suspend fun deleteItem(toDoData: ToDoData)

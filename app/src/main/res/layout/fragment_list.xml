@@ -18,12 +18,12 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewListView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:background="@drawable/backgroung_orange_pattern"
+            android:background="@color/colorSecondary"
             android:clipToPadding="false"
             android:layoutAnimation="@anim/recyclerview_anim"
             android:paddingTop="8dp"
@@ -47,7 +47,8 @@
             app:tint="@color/white"
             app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="TODO" />
 
         <ImageView
             android:id="@+id/no_data_imageView"
