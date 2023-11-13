@@ -11,7 +11,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.steccos.mynoteapp.R
-import com.steccos.mynoteapp.data.models.Background
 import com.steccos.mynoteapp.data.models.Priority
 import com.steccos.mynoteapp.data.models.ToDoData
 import com.steccos.mynoteapp.fragments.list.ListFragmentDirections

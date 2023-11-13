@@ -2,7 +2,6 @@ package com.steccos.mynoteapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.steccos.mynoteapp.data.models.Background
 import com.steccos.mynoteapp.data.models.ToDoData
 
 @Dao

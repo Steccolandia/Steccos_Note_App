@@ -21,18 +21,18 @@
             android:id="@+id/recyclerViewListView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="1dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/colorBackground"
             android:clipToPadding="false"
             android:layoutAnimation="@anim/recyclerview_anim"
             android:paddingTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -45,7 +45,7 @@
             android:navigateToAddFragment="@{true}"
             android:src="@drawable/ic_add"
             app:tint="@color/white"
-            app:backgroundTint="@color/colorAccent"
+            app:backgroundTint="@color/AddButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="TODO" />

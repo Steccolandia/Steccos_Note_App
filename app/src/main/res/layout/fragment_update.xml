@@ -15,13 +15,15 @@
         android:layout_height="match_parent"
         android:padding="24dp"
         tools:context=".fragments.update.UpdateFragment"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorBackground">
 
         <EditText
             android:id="@+id/current_title_et"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:background="@color/colorSecondary"
+            android:background="@drawable/rounded_corners_edittext"
+            android:textColorHint="@color/colorTextHint"
+            android:textColor="@color/TextColor"
             android:ems="10"
             android:hint="@string/title"
             android:inputType="textPersonName"
@@ -38,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorSecondary"
+            android:background="@drawable/rounded_corners_edittext"
             android:entries="@array/priorities"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -53,7 +55,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:background="@color/colorSecondary"
+            android:background="@drawable/rounded_corners_edittext"
+            android:textColorHint="@color/colorTextHint"
+            android:textColor="@color/TextColor"
             android:ems="10"
             android:gravity="top|start"
             android:hint="@string/description"
