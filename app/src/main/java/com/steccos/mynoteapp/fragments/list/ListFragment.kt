@@ -3,12 +3,7 @@ package com.steccos.mynoteapp.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
@@ -28,6 +23,10 @@ import com.steccos.mynoteapp.fragments.SharedViewModel
 import com.steccos.mynoteapp.fragments.list.adapter.ListAdapter
 import com.steccos.mynoteapp.utils.hideKeyboard
 import com.steccos.mynoteapp.utils.observeOnce
+import jp.wasabeef.recyclerview.animators.FadeInAnimator
+import jp.wasabeef.recyclerview.animators.FlipInRightYAnimator
+import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -98,6 +97,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         val recyclerView = binding.recyclerViewListView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        //set the item Animator
+        recyclerView.itemAnimator = LandingAnimator().apply {
+            addDuration = 100
+        }
+
         //swipe to delete
         swipeToDelete(recyclerView)
     }
@@ -109,18 +114,20 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 mToDoViewModel.deleteItem(deletedItem)
                 adapter.notifyItemRemoved(viewHolder.adapterPosition)
                 //restore deletedData fun
-                restoreDeletedData(viewHolder.itemView, deletedItem)
+                restoreDeletedData(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
             }
         }
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    private fun restoreDeletedData(view: View, deletedItem: ToDoData) {
+    private fun restoreDeletedData(view: View, deletedItem: ToDoData, position: Int) {
         val snackBar = Snackbar.make(
             view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
+            //next line is required in the library but crashed the app when I pres 'undo'
+            //adapter.notifyItemChanged(position)
         }
         snackBar.show()
     }
@@ -140,7 +147,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchThroughDatabase(query: String) {
-        val searchQuery = "%$query%"
+        var searchQuery: String = query
+                searchQuery = "%$searchQuery%"
 
         mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner) { list ->
             list.let {
