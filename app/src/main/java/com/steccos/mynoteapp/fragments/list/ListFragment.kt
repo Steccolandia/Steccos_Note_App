@@ -3,7 +3,12 @@ package com.steccos.mynoteapp.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
@@ -23,10 +28,7 @@ import com.steccos.mynoteapp.fragments.SharedViewModel
 import com.steccos.mynoteapp.fragments.list.adapter.ListAdapter
 import com.steccos.mynoteapp.utils.hideKeyboard
 import com.steccos.mynoteapp.utils.observeOnce
-import jp.wasabeef.recyclerview.animators.FadeInAnimator
-import jp.wasabeef.recyclerview.animators.FlipInRightYAnimator
 import jp.wasabeef.recyclerview.animators.LandingAnimator
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -126,7 +128,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             view, "Deleted '${deletedItem.title}'", Snackbar.LENGTH_LONG)
         snackBar.setAction("Undo") {
             mToDoViewModel.insertData(deletedItem)
-            //next line is required in the library but crashed the app when I pres 'undo'
+            //next line is required in the animation library but crashes the app when I press 'undo'
             //adapter.notifyItemChanged(position)
         }
         snackBar.show()
@@ -147,8 +149,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun searchThroughDatabase(query: String) {
-        var searchQuery: String = query
-                searchQuery = "%$searchQuery%"
+        val searchQuery = "%$query%"
 
         mToDoViewModel.searchDatabase(searchQuery).observeOnce(viewLifecycleOwner) { list ->
             list.let {
